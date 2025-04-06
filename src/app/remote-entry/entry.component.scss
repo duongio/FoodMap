@@ -1,0 +1,44 @@
+.input-user {
+  width: 75%;
+  margin: auto;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.btn {
+  width: 150px;
+  margin-top: 0.5rem;
+  color: #007bff;
+  border: 1px solid #007bff;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.5s ease;
+}
+
+.btn:hover {
+  background-color: #d1e2f5;
+}
+
+.btn-select {
+  background-color: #007bff;
+  color: white;
+}
+
+.result {
+  margin: auto;
+}
+
+@media screen and (max-width: 768px) {
+  .input-user {
+    width: 95%;
+  }
+
+  .btn {
+    width: 120px;
+    font-size: 14px;
+    padding: 3px 5px;
+  }
+}
