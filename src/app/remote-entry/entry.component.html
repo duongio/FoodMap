@@ -34,7 +34,7 @@
   <div class="result" *ngIf="resultExact.length > 0 || resultFuzzy.length > 0; else noResult">
     <ul *ngIf="tab === 'exact'">
       <li *ngFor="let product of resultExact">
-        <div class="my-2" (click)="onClickProduct(product)">
+        <div class="item" (click)="onClickProduct(product)">
           <div><strong>{{ product.name }}</strong></div>
           <div class="d-flex gap-5">
             <span>Giá: <b>{{ product.price | number }}đ</b></span>
@@ -46,7 +46,7 @@
     </ul>
     <ul *ngIf="tab === 'fuzzy'">
       <li *ngFor="let product of resultFuzzy">
-        <div class="my-2" (click)="onClickProduct(product)">
+        <div class="item" (click)="onClickProduct(product)">
           <div><strong>{{ product.name }}</strong></div>
           <div class="d-flex gap-5">
             <span>Giá: <b>{{ product.price | number }}đ</b></span>
@@ -58,7 +58,7 @@
     </ul>
     <ul *ngIf="tab === 'group'">
       <li *ngFor="let product of resultGroup">
-        <div class="my-2" (click)="onClickProduct(product)">
+        <div class="item" (click)="onClickProduct(product)">
           <div><strong>{{ product.name }}</strong></div>
           <div class="d-flex gap-5">
             <span>Giá: <b>{{ product.price | number }}đ</b></span>
