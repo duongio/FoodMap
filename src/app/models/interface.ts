@@ -8,3 +8,11 @@ export interface Product {
   similarity?: number;
   groupId?: number;
 }
+
+export interface Shop {
+  id: string;
+  name: string;
+  address: string;
+  link: string;
+  type: string;
+}

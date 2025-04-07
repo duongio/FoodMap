@@ -1,10 +1,12 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { debounceTime, Subject, takeUntil } from "rxjs";
 import { searchProducts } from "../libs/ten-chinh-xac";
-import { Product } from "../models/interface";
+import { Product, Shop } from "../models/interface";
 import { ProductService } from "../services/get-data.service";
 import { prepareFuse, searchFuzzyProducts } from "../libs/ten-gan-dung";
 import { getMatchingGroups } from "../libs/ten-theo-nhom";
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { ChiTietSanPhamComponent } from "../components/chi-tiet-san-pham/chi-tiet-san-pham.component";
 
 @Component({
     selector: 'app-entry',
@@ -15,6 +17,9 @@ import { getMatchingGroups } from "../libs/ten-theo-nhom";
 export class EntryComponent implements OnInit, OnDestroy {
     products: Product[] = [];
     allGroups: Product[][] = [];
+    shops: Shop[] = [];
+    shop!: Shop;
+
     tenSanPham: string = '';
     giaTu: number = NaN;
     giaDen: number = NaN;
@@ -32,6 +37,7 @@ export class EntryComponent implements OnInit, OnDestroy {
 
     constructor(
         private productService: ProductService,
+        private nzModalService: NzModalService,
     ) { }
 
     ngOnInit() {
@@ -57,6 +63,11 @@ export class EntryComponent implements OnInit, OnDestroy {
                         return group;
                     }
                 });
+            });
+        this.productService.getShop()
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((response) => {
+                this.shops = response;
             });
         this.changeGia
             .pipe(debounceTime(500), takeUntil(this.destroy$))
@@ -91,8 +102,6 @@ export class EntryComponent implements OnInit, OnDestroy {
     }
 
     searchSP() {
-        // this.checkValue();
-
         this.resultExact = searchProducts(
             this.tenSanPham,
             this.products,
@@ -119,13 +128,27 @@ export class EntryComponent implements OnInit, OnDestroy {
         );
     }
 
-    checkValue() {
-        this.giaTu = this.giaTu ? this.giaTu : 0;
-        this.giaDen = this.giaDen ? this.giaDen : 1000000;
-        this.rating = this.rating ? this.rating : 0;
-    }
-
     onClick(tab: string) {
         this.tab = tab;
+    }
+
+    onClickProduct(product: Product) {
+        this.shop = this.shops.find(shop => shop.id === product.id)!;
+        this.nzModalService.create({
+            nzTitle: '',
+            nzContent: ChiTietSanPhamComponent,
+            nzFooter: null,
+            // nzWidth: '90vw',
+            nzBodyStyle: {
+                'padding': '20px',
+                'border-radius': '10px',
+                'overflow-y': 'auto',
+                // 'height': '85vh',
+            },
+            nzStyle: { top: '20px' },
+            nzClassName: 'no-padding-title-modal',
+            nzCentered: true,
+            nzData: { product, shop: this.shop, parent: this }
+        })
     }
 }
