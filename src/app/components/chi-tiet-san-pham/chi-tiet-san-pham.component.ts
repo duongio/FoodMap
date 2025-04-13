@@ -2,6 +2,7 @@ import { AfterViewInit, Component, Inject, OnInit } from "@angular/core";
 import { NZ_MODAL_DATA } from "ng-zorro-antd/modal";
 import { Product, Shop } from "../../models/interface";
 // import * as L from 'leaflet';
+import 'leaflet';
 import 'leaflet-routing-machine';
 
 declare module 'leaflet' {
