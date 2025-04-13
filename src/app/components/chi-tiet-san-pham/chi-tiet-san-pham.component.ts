@@ -4,6 +4,12 @@ import { Product, Shop } from "../../models/interface";
 import * as L from 'leaflet';
 import 'leaflet-routing-machine';
 
+declare module 'leaflet' {
+  namespace Routing {
+    function control(options: any): any;
+  }
+}
+
 @Component({
   selector: 'app-chi-tiet-san-pham',
   standalone: false,
@@ -65,14 +71,13 @@ export class ChiTietSanPhamComponent implements OnInit, AfterViewInit {
         position => {
           const userLat = position.coords.latitude;
           const userLon = position.coords.longitude;
-          console.log("Vị trí của bạn:", userLat, userLon);
 
           L.marker([userLat, userLon])
             .addTo(map)
             .bindPopup("Vị trí của bạn")
             .openPopup();
 
-          // @ts-ignore
+
           L.Routing.control({
             waypoints: [
               L.latLng(userLat, userLon),
