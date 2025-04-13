@@ -13,6 +13,20 @@ declare module 'leaflet' {
 
 declare let L: any;
 
+delete (L.Icon.Default.prototype as any)._getIconUrl;
+L.Marker.prototype.options.icon = L.icon({
+  iconUrl: '',
+  iconSize: [0, 0], // Không hiển thị
+  shadowUrl: '',
+  shadowSize: [0, 0]
+});
+// L.Icon.Default.mergeOptions({
+//   iconRetinaUrl: 'assets/icons/marker-icon-2x.png',
+//   iconUrl: 'assets/icons/marker-icon.png',
+//   shadowUrl: 'assets/icons/marker-shadow.png'
+// });
+
+
 @Component({
   selector: 'app-chi-tiet-san-pham',
   standalone: false,
@@ -65,7 +79,14 @@ export class ChiTietSanPhamComponent implements OnInit, AfterViewInit {
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap contributors'
       }).addTo(map);
-      L.marker([this.lat, this.lon])
+
+      const shopIcon = L.icon({
+        iconUrl: 'assets/restaurant.png',
+        iconSize: [60, 40],
+        iconAnchor: [16, 32],
+        popupAnchor: [0, -32],
+      });
+      L.marker([this.lat, this.lon], { icon: shopIcon })
         .addTo(map)
         .bindPopup(`<b>${this.shop.name}</b><br>${this.shop.address}`)
         .openPopup();
@@ -76,7 +97,13 @@ export class ChiTietSanPhamComponent implements OnInit, AfterViewInit {
             const userLat = position.coords.latitude;
             const userLon = position.coords.longitude;
 
-            L.marker([userLat, userLon])
+            const userIcon = L.icon({
+              iconUrl: 'assets/user.png',
+              iconSize: [60, 40],
+              iconAnchor: [16, 32],
+              popupAnchor: [0, -32],
+            });
+            L.marker([userLat, userLon], { icon: userIcon })
               .addTo(map)
               .bindPopup("Vị trí của bạn")
               .openPopup();
