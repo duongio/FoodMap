@@ -15,4 +15,5 @@ export interface Shop {
   address: string;
   link: string;
   type: string;
+  "lat-lon": string;
 }

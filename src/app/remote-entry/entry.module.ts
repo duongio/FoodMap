@@ -9,12 +9,14 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { ChiTietSanPhamComponent } from "../components/chi-tiet-san-pham/chi-tiet-san-pham.component";
+import { MapComponent } from "../components/map/map.component";
 
 @NgModule({
     declarations: [
         EntryComponent,
 
         ChiTietSanPhamComponent,
+        MapComponent,
     ],
     imports: [
         CommonModule, FormsModule, ReactiveFormsModule,

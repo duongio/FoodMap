@@ -1,6 +1,6 @@
-<div class="d-flex flex-column gap-3">
+<div class="d-flex flex-column gap-4">
   <div class="d-flex flex-column gap-2">
-    <span class="fs-5"><strong>Chi tiết sản phầm</strong></span>
+    <span class="fs-5 text-primary"><strong>Chi tiết sản phầm</strong></span>
     <div class="d-flex flex-column gap-1 mx-2">
       <div class="d-flex gap-2">
         <img [src]="product.image" alt="Ảnh sản phẩm" style="width: 100px" />
@@ -15,11 +15,17 @@
     </div>
   </div>
   <div class="d-flex flex-column gap-2">
-    <span class="fs-5"><strong>Cửa hàng</strong></span>
+    <span class="fs-5 text-primary"><strong>Cửa hàng</strong></span>
     <div class="d-flex flex-column gap-1 mx-2">
       <span class="fs-6 fw-bold">{{shop.name}}</span>
       <span>📍📍 {{shop.address}}</span>
       <span><a [href]="shop.link" target="_blank">{{shop.link}}</a></span>
+    </div>
+  </div>
+  <div class="d-flex flex-column gap-2">
+    <span class="fs-5 text-primary"><strong>MAP</strong></span>
+    <div class="mx-5">
+      <div id="map" style="width: 100%; height: 600px;"></div>
     </div>
   </div>
 </div>

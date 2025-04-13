@@ -138,14 +138,14 @@ export class EntryComponent implements OnInit, OnDestroy {
             nzTitle: '',
             nzContent: ChiTietSanPhamComponent,
             nzFooter: null,
-            // nzWidth: '90vw',
+            nzWidth: '90vw',
             nzBodyStyle: {
                 'padding': '20px',
                 'border-radius': '10px',
                 'overflow-y': 'auto',
-                // 'height': '85vh',
+                'height': '90vh',
             },
-            nzStyle: { top: '20px' },
+            nzStyle: { top: '10px' },
             nzClassName: 'no-padding-title-modal',
             nzCentered: true,
             nzData: { product, shop: this.shop, parent: this }
