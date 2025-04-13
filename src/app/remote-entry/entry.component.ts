@@ -138,7 +138,7 @@ export class EntryComponent implements OnInit, OnDestroy {
             nzTitle: '',
             nzContent: ChiTietSanPhamComponent,
             nzFooter: null,
-            nzWidth: '90vw',
+            nzWidth: '95vw',
             nzBodyStyle: {
                 'padding': '20px',
                 'border-radius': '10px',
