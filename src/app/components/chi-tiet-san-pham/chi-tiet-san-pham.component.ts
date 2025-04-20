@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, Inject, OnInit } from "@angular/core";
 import { NZ_MODAL_DATA } from "ng-zorro-antd/modal";
 import { Product, Shop } from "../../models/interface";
-// import * as L from 'leaflet';
 import 'leaflet';
 import 'leaflet-routing-machine';
 
@@ -16,16 +15,10 @@ declare let L: any;
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Marker.prototype.options.icon = L.icon({
   iconUrl: '',
-  iconSize: [0, 0], // Không hiển thị
+  iconSize: [0, 0],
   shadowUrl: '',
   shadowSize: [0, 0]
 });
-// L.Icon.Default.mergeOptions({
-//   iconRetinaUrl: 'assets/icons/marker-icon-2x.png',
-//   iconUrl: 'assets/icons/marker-icon.png',
-//   shadowUrl: 'assets/icons/marker-shadow.png'
-// });
-
 
 @Component({
   selector: 'app-chi-tiet-san-pham',
@@ -51,26 +44,6 @@ export class ChiTietSanPhamComponent implements OnInit, AfterViewInit {
     this.lat = parseFloat(latStr);
     this.lon = parseFloat(lonStr);
   }
-
-  // ngAfterViewInit(): void {
-  //   const map = L.map('map').setView([21.0285, 105.8542], 14);
-
-  //   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  //     attribution: '&copy; OpenStreetMap contributors'
-  //   }).addTo(map);
-
-  //   const restaurants = [
-  //     { name: "Nhà hàng A", address: "123 Hoàn Kiếm", lat: 21.033, lon: 105.85 },
-  //     { name: "Nhà hàng B", address: "45 Cầu Giấy", lat: 21.035, lon: 105.80 },
-  //     { name: "Nhà hàng C", address: "78 Ba Đình", lat: 21.028, lon: 105.82 }
-  //   ];
-
-  //   restaurants.forEach(restaurant => {
-  //     L.marker([restaurant.lat, restaurant.lon])
-  //       .addTo(map)
-  //       .bindPopup(`<b>${restaurant.name}</b><br>${restaurant.address}`);
-  //   });
-  // }
 
   ngAfterViewInit(): void {
     if (typeof window !== 'undefined' && L?.Routing) {
@@ -107,7 +80,6 @@ export class ChiTietSanPhamComponent implements OnInit, AfterViewInit {
               .addTo(map)
               .bindPopup("Vị trí của bạn")
               .openPopup();
-
 
             L.Routing.control({
               waypoints: [

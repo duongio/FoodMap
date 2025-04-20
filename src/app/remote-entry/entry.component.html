@@ -6,24 +6,23 @@
   <div class="input-user">
     <div class="row">
       <nz-input-group nzSearch>
-        <input type="text" [(ngModel)]="tenSanPham" (ngModelChange)="onName($event)" nz-input
-          placeholder="Tên sản phẩm" />
+        <input type="text" [(ngModel)]="tenSanPham" (ngModelChange)="onName()" nz-input placeholder="Tên sản phẩm" />
       </nz-input-group>
     </div>
     <div class="row">
       <div class="col-4">
         <nz-input-group nzSearch>
-          <input type="number" [(ngModel)]="giaTu" (ngModelChange)="onGiaTu($event)" nz-input placeholder="Giá từ" />
+          <input type="number" [(ngModel)]="giaTu" (ngModelChange)="onGiaTu()" nz-input placeholder="Giá từ" />
         </nz-input-group>
       </div>
       <div class="col-4">
         <nz-input-group nzSearch>
-          <input type="number" [(ngModel)]="giaDen" (ngModelChange)="onGiaDen($event)" nz-input placeholder="Giá đến" />
+          <input type="number" [(ngModel)]="giaDen" (ngModelChange)="onGiaDen()" nz-input placeholder="Giá đến" />
         </nz-input-group>
       </div>
       <div class="col-4">
         <nz-input-group nzSearch>
-          <input type="number" [(ngModel)]="rating" (ngModelChange)="onRating($event)" nz-input placeholder="Rating" />
+          <input type="number" [(ngModel)]="rating" (ngModelChange)="onRating()" nz-input placeholder="Rating" />
         </nz-input-group>
       </div>
     </div>
@@ -35,43 +34,48 @@
     <span class="btn" [ngClass]="tab === 'group' ? 'btn-select' : ''" (click)="onClick('group')">Có thể thích</span>
   </div>
 
-  <div class="result" *ngIf="resultExact.length > 0 || resultFuzzy.length > 0; else noResult">
-    <ul *ngIf="tab === 'exact'">
-      <li *ngFor="let product of resultExact">
-        <div class="item" (click)="onClickProduct(product)">
-          <div><strong>{{ product.name }}</strong></div>
-          <div class="d-flex gap-5">
-            <span>Giá: <b>{{ product.price | number }}đ</b></span>
-            <span>Đánh giá: {{ product.rate }} ⭐</span>
+  <div class="d-flex gap-4 m-auto">
+    <div id="map1" style="width: 800px; height: 750px;"></div>
+
+    <div class="result" *ngIf="resultExact.length > 0 || resultFuzzy.length > 0; else noResult">
+      <ul *ngIf="tab === 'exact'">
+        <li *ngFor="let product of resultExact">
+          <div class="item" (click)="onClickProduct(product)">
+            <div><strong>{{ product.name }}</strong></div>
+            <div class="d-flex gap-5">
+              <span>Giá: <b>{{ product.price | number }}đ</b></span>
+              <span>Đánh giá: {{ product.rate }} ⭐</span>
+            </div>
           </div>
-        </div>
-      </li>
-      <p *ngIf="resultExact.length === 0" class="text-center">Không tìm thấy sản phẩm nào phù hợp.</p>
-    </ul>
-    <ul *ngIf="tab === 'fuzzy'">
-      <li *ngFor="let product of resultFuzzy">
-        <div class="item" (click)="onClickProduct(product)">
-          <div><strong>{{ product.name }}</strong></div>
-          <div class="d-flex gap-5">
-            <span>Giá: <b>{{ product.price | number }}đ</b></span>
-            <span>Đánh giá: {{ product.rate }} ⭐</span>
+        </li>
+        <p *ngIf="resultExact.length === 0" class="text-center">Không tìm thấy sản phẩm nào phù hợp.</p>
+      </ul>
+      <ul *ngIf="tab === 'fuzzy'">
+        <li *ngFor="let product of resultFuzzy">
+          <div class="item" (click)="onClickProduct(product)">
+            <div><strong>{{ product.name }}</strong></div>
+            <div class="d-flex gap-5">
+              <span>Giá: <b>{{ product.price | number }}đ</b></span>
+              <span>Đánh giá: {{ product.rate }} ⭐</span>
+            </div>
           </div>
-        </div>
-      </li>
-      <p *ngIf="resultFuzzy.length === 0" class="text-center">Không tìm thấy sản phẩm nào phù hợp.</p>
-    </ul>
-    <ul *ngIf="tab === 'group'">
-      <li *ngFor="let product of resultGroup">
-        <div class="item" (click)="onClickProduct(product)">
-          <div><strong>{{ product.name }}</strong></div>
-          <div class="d-flex gap-5">
-            <span>Giá: <b>{{ product.price | number }}đ</b></span>
-            <span>Đánh giá: {{ product.rate }} ⭐</span>
+        </li>
+        <p *ngIf="resultFuzzy.length === 0" class="text-center">Không tìm thấy sản phẩm nào phù hợp.</p>
+      </ul>
+      <ul *ngIf="tab === 'group'">
+        <li *ngFor="let product of resultGroup">
+          <div class="item" (click)="onClickProduct(product)">
+            <div><strong>{{ product.name }}</strong></div>
+            <div class="d-flex gap-5">
+              <span>Giá: <b>{{ product.price | number }}đ</b></span>
+              <span>Đánh giá: {{ product.rate }} ⭐</span>
+            </div>
           </div>
-        </div>
-      </li>
-      <p *ngIf="resultFuzzy.length === 0" class="text-center">Không tìm thấy sản phẩm nào phù hợp.</p>
-    </ul>
+        </li>
+        <p *ngIf="resultFuzzy.length === 0" class="text-center">Không tìm thấy sản phẩm nào phù hợp.</p>
+      </ul>
+    </div>
+
   </div>
   <ng-template #noResult>
     <p class="text-center">Không tìm thấy sản phẩm nào phù hợp.</p>
