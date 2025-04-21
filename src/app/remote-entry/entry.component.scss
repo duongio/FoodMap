@@ -35,6 +35,23 @@
   color: white;
 }
 
+.hidden {
+  display: none;
+}
+
+.content-box {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.map {
+  width: 800px;
+  height: 750px;
+}
+
 .item {
   margin: 10px 0;
   cursor: pointer;
@@ -57,5 +74,15 @@
     width: 120px;
     font-size: 14px;
     padding: 3px 5px;
+  }
+
+  .content-box {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .map {
+    width: 100%;
+    height: 500px;
   }
 }

@@ -42,6 +42,7 @@ L.Marker.prototype.options.icon = L.icon({
     styleUrls: ['./entry.component.scss'],
 })
 export class EntryComponent implements OnInit, OnDestroy, AfterViewInit {
+    hidden: boolean = false;
     products: Product[] = [];
     allGroups: Product[][] = [];
     shops: Shop[] = [];
@@ -125,6 +126,11 @@ export class EntryComponent implements OnInit, OnDestroy, AfterViewInit {
     onGiaTu() { this.changeGia.next(null); }
     onGiaDen() { this.changeGia.next(null); }
     onRating() { this.changeGia.next(null); }
+
+    onClickEye() {
+        this.hidden = !this.hidden;
+        location.reload();
+    }
 
     searchSP() {
         this.resultExact = searchProducts(

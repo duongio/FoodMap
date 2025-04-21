@@ -6,8 +6,15 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzIconModule, NZ_ICONS } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
+
+import { EyeInvisibleOutline } from '@ant-design/icons-angular/icons';
+
+const icons = [
+    EyeInvisibleOutline,
+]
+
 import { ChiTietSanPhamComponent } from "../components/chi-tiet-san-pham/chi-tiet-san-pham.component";
 import { MapComponent } from "../components/map/map.component";
 
@@ -28,6 +35,7 @@ import { MapComponent } from "../components/map/map.component";
         NzInputModule,
     ],
     providers: [
+        { provide: NZ_ICONS, useValue: icons },
     ],
     exports: [
         EntryComponent

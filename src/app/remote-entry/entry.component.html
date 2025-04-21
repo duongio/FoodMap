@@ -34,8 +34,13 @@
     <span class="btn" [ngClass]="tab === 'group' ? 'btn-select' : ''" (click)="onClick('group')">Có thể thích</span>
   </div>
 
-  <div class="d-flex gap-4 m-auto">
-    <div id="map1" style="width: 800px; height: 750px;"></div>
+  <div class="content-box">
+    <button nz-button *ngIf="!hidden" (click)="hidden = !hidden"><nz-icon nzType="eye-invisible"
+        nzTheme="outline" /></button>
+    <button nz-button *ngIf="hidden" (click)="hidden = !hidden"><nz-icon nzType="eye" nzTheme="outline" /></button>
+    <div [ngClass]="hidden ? 'hidden' : ''">
+      <div id="map1" class="map"></div>
+    </div>
 
     <div class="result" *ngIf="resultExact.length > 0 || resultFuzzy.length > 0; else noResult">
       <ul *ngIf="tab === 'exact'">
