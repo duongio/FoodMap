@@ -18,7 +18,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { ChiTietSanPhamComponent } from "../components/chi-tiet-san-pham/chi-tiet-san-pham.component";
 import 'leaflet';
 import 'leaflet-routing-machine';
-import { calculateDistance } from "../libs/distance"; // Ensure this function is correct and exported
+import { calculateDistance } from "../libs/distance";
 
 declare module 'leaflet' {
     namespace Routing {
@@ -216,6 +216,13 @@ export class EntryComponent implements OnInit, OnDestroy, AfterViewInit {
             popupAnchor: [0, -32],
         });
 
+        const shopIconOver = L.icon({
+            iconUrl: 'assets/restaurant-over-km.png',
+            iconSize: [70, 40],
+            iconAnchor: [16, 32],
+            popupAnchor: [0, -32],
+        });
+
         const maxDistanceKm = 3;
 
         this.map.eachLayer((layer: any) => {
@@ -236,30 +243,31 @@ export class EntryComponent implements OnInit, OnDestroy, AfterViewInit {
             const lon = parseFloat(lonStr);
 
             const distance = calculateDistance(this.userLatLng.lat, this.userLatLng.lng, lat, lon);
-            if (distance <= maxDistanceKm) {
-                const marker = L.marker([lat, lon], { icon: shopIcon }).addTo(this.map);
 
-                const popupId = `popup-${product.id}`;
-                marker.bindPopup(`
-                    <b>${product.name}</b><br/>
-                    <i>${shop.name}</i><br/>
-                    ${shop.address}<br/>
-                    Giá: ${product.price.toLocaleString()}đ<br/>
-                    Cách bạn khoảng: ${distance.toFixed(2)} km<br/>
-                    <button id="${popupId}" style="margin-top:5px;color:#1890ff;border:none;background:none;cursor:pointer;">Xem chi tiết</button>
-                `);
+            const icon = distance <= maxDistanceKm ? shopIcon : shopIconOver;
 
-                marker.on('popupopen', () => {
-                    setTimeout(() => {
-                        const btn = document.getElementById(popupId);
-                        if (btn) {
-                            btn.addEventListener('click', () => {
-                                this.onClickProduct(product);
-                            });
-                        }
-                    }, 100);
-                });
-            }
+            const marker = L.marker([lat, lon], { icon }).addTo(this.map);
+
+            const popupId = `popup-${product.id}`;
+            marker.bindPopup(`
+                <b>${product.name}</b><br/>
+                <i>${shop.name}</i><br/>
+                ${shop.address}<br/>
+                Giá: ${product.price.toLocaleString()}đ<br/>
+                Cách bạn khoảng: ${distance.toFixed(2)} km<br/>
+                <button id="${popupId}" style="margin-top:5px;color:#1890ff;border:none;background:none;cursor:pointer;">Xem chi tiết</button>
+            `);
+
+            marker.on('popupopen', () => {
+                setTimeout(() => {
+                    const btn = document.getElementById(popupId);
+                    if (btn) {
+                        btn.addEventListener('click', () => {
+                            this.onClickProduct(product);
+                        });
+                    }
+                }, 100);
+            });
         });
     }
 
